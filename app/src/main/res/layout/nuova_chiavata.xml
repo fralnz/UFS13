@@ -4,6 +4,7 @@
     android:id="@+id/chiavaPagina"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1C1C1C"
     android:orientation="vertical"
     tools:context=".NuovaChiavataActivity">
 
@@ -37,6 +38,7 @@
                 android:id="@+id/nomeText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:layout_marginTop="20dp"
                 android:text="Nome/Nomignolo:" />
 
@@ -46,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nomeText"
                 android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
                 android:inputType="text" />
 
             <TextView
@@ -54,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nome"
                 android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
                 android:text="Luogo:" />
 
 
@@ -61,6 +65,7 @@
                 android:id="@+id/luogo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
                 android:layout_below="@id/luogoText"
                 android:layout_marginTop="10dp"
                 android:ems="10"
@@ -73,7 +78,9 @@
                 android:layout_below="@id/luogo"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Posto:" />
+                android:text="Posto:"
+                android:textColor="#FFFFFF"
+                />
 
 
             <EditText
@@ -83,7 +90,9 @@
                 android:layout_below="@id/postText"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                />
 
             <TextView
                 android:id="@+id/selezionaTagText"
@@ -92,7 +101,9 @@
                 android:layout_below="@id/posto"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Tag:" />
+                android:text="Tag:"
+                android:textColor="#FFFFFF"
+                />
 
 
             <MultiAutoCompleteTextView
@@ -100,7 +111,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/selezionaTagText"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                />
 
             <TextView
                 android:id="@+id/dataText"
@@ -109,7 +122,9 @@
                 android:layout_below="@id/selezionaTag"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Data:" />
+                android:text="Data:"
+                android:textColor="#FFFFFF"
+                />
 
             <!--DA METTERE IN MODO  -->
             <EditText
@@ -119,7 +134,9 @@
                 android:layout_below="@id/dataText"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:textColor="#FFFFFF"
+                />
 
 
             <TextView
@@ -129,7 +146,9 @@
                 android:layout_below="@id/data"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Descrizione:" />
+                android:text="Descrizione:"
+                android:textColor="#FFFFFF"
+                />
 
             <EditText
                 android:id="@+id/descrizione"
@@ -138,7 +157,9 @@
                 android:layout_below="@id/descrizioneText"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                />
 
 
             <TextView
@@ -148,7 +169,9 @@
                 android:layout_below="@id/descrizione"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Bondage:" />
+                android:text="Bondage:"
+                android:textColor="#FFFFFF"
+                />
 
 
             <MultiAutoCompleteTextView
@@ -156,7 +179,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/bondageText"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                />
 
             <TextView
                 android:id="@+id/giochiText"
@@ -165,7 +190,9 @@
                 android:layout_below="@id/bondage"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Giochi:" />
+                android:text="Giochi:"
+                android:textColor="#FFFFFF"
+                />
 
 
             <MultiAutoCompleteTextView
@@ -173,7 +200,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/giochiText"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                />
 
 
             <TextView
@@ -183,7 +212,9 @@
                 android:layout_below="@id/giochi"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Votazione:" />
+                android:text="Votazione:"
+                android:textColor="#FFFFFF"
+                />
 
 
             <RatingBar
@@ -194,7 +225,8 @@
                 android:max="100"
                 android:numStars="5"
                 android:rating="5"
-                android:stepSize="1" />
+                android:stepSize="1"
+                />
 
             <Button
                 android:id="@+id/salvaButton"
