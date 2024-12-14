@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Persona {
+    private int id;
     private String nome;
     private String genere;
 
@@ -29,6 +30,14 @@ public class Persona {
         this.genere = genere;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -50,12 +59,12 @@ public class Persona {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Persona persona = (Persona) o;
-        return Objects.equals(nome, persona.nome) && Objects.equals(genere, persona.genere);
+        return id == persona.id && Objects.equals(nome, persona.nome) && Objects.equals(genere, persona.genere);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, genere);
+        return Objects.hash(id, nome, genere);
     }
 
     @NonNull
