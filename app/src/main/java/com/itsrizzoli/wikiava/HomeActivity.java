@@ -1,6 +1,7 @@
 package com.itsrizzoli.wikiava;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,10 +14,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.itsrizzoli.wikiava.database.ChiavataDbAdapter;
 import com.itsrizzoli.wikiava.models.Chiavata;
 import com.itsrizzoli.wikiava.models.DataList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -52,7 +55,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<Chiavata> chiavate = DataList.getInstance().getChiavate();
+        ChiavataDbAdapter dbAdpt = new ChiavataDbAdapter(this.getBaseContext());
+        List<Chiavata> chiavate = dbAdpt.getAllChiavate();
         ListView listView = findViewById(R.id.chiavateListView);
         ArrayAdapter<Chiavata> chiavateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, chiavate);
         listView.setAdapter(chiavateAdapter);
