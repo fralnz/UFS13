@@ -55,9 +55,32 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        ChiavataDbAdapter dbAdpt = new ChiavataDbAdapter(this.getBaseContext());
-        List<Chiavata> chiavate = dbAdpt.getAllChiavate();
         ListView listView = findViewById(R.id.chiavateListView);
+        ChiavataDbAdapter dbAdapter = new ChiavataDbAdapter(getApplicationContext());
+        dbAdapter.open();
+
+        Cursor cursor = dbAdapter.fetchAllChiavate();
+        ArrayList<Chiavata> chiavate = new ArrayList<>();
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                Chiavata chiavata = new Chiavata();
+                chiavata.setId(cursor.getInt(cursor.getColumnIndex("ID_Rapporti")));
+                chiavata.setVoto(cursor.getFloat(cursor.getColumnIndex("votazione")));
+                chiavata.setLuogo(cursor.getString(cursor.getColumnIndex("luogo")));
+                chiavata.setPosto(cursor.getString(cursor.getColumnIndex("posto")));
+                chiavata.setData(cursor.getString(cursor.getColumnIndex("data_rapporto")));
+                chiavata.setDescrizione(cursor.getString(cursor.getColumnIndex("descrizione")));
+                // Assuming you handle tags separately or load them later
+                chiavate.add(chiavata);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        dbAdapter.close();
+
         ArrayAdapter<Chiavata> chiavateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, chiavate);
         listView.setAdapter(chiavateAdapter);
     }

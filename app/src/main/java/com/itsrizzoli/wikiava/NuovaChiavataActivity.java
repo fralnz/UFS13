@@ -18,6 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.itsrizzoli.wikiava.models.Chiavata;
 import com.itsrizzoli.wikiava.models.DataList;
 import com.itsrizzoli.wikiava.models.Persona;
+import com.itsrizzoli.wikiava.database.PersonaDbAdapter;
+import com.itsrizzoli.wikiava.database.ChiavataDbAdapter;
 
 import java.util.ArrayList;
 
@@ -50,13 +52,41 @@ public class NuovaChiavataActivity extends AppCompatActivity {
         salvaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Collect data from input fields
                 String nome = nomeEditText.getText().toString();
                 String luogo = luogoEditText.getText().toString();
                 String data = dataEditText.getText().toString();
                 float voto = votoBar.getRating();
-                Persona persona = new Persona(nome, "boh");
-                Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", tags, 6, 33, 6);
-                DataList.getInstance().addChiavata(nuovaChiavata);
+
+                // Initialize tags
+                ArrayList<String> selectedTags = new ArrayList<>();
+                for (String tag : selezionaTag.getText().toString().split(",\\s*")) {
+                    selectedTags.add(tag.trim());
+                }
+
+                // Create a Persona object
+                Persona persona = new Persona(nome, "Unknown"); // Example with placeholder genre
+
+                // Insert Persona into database
+                PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(NuovaChiavataActivity.this);
+                personaDbAdapter.open();
+                long personaId = personaDbAdapter.createPersona(persona);
+                personaDbAdapter.close();
+
+                if (personaId > 0) {
+                    persona.setId((int) personaId);
+
+                    // Create a Chiavata object
+                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
+
+                    // Insert Chiavata into database
+                    ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(NuovaChiavataActivity.this);
+                    chiavataDbAdapter.open();
+                    chiavataDbAdapter.createChiavata(nuovaChiavata);
+                    chiavataDbAdapter.close();
+                }
+
+                // Navigate back to HomeActivity
                 Intent homeIntent = new Intent(NuovaChiavataActivity.this, HomeActivity.class);
                 startActivity(homeIntent);
             }
