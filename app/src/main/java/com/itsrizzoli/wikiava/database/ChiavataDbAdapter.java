@@ -5,13 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.itsrizzoli.wikiava.models.Chiavata;
 import com.itsrizzoli.wikiava.models.Persona;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChiavataDbAdapter {
 
@@ -82,5 +80,61 @@ public class ChiavataDbAdapter {
             cursor.moveToFirst();
         }
         return cursor;
+    }
+
+    public ArrayList<Chiavata> fetchAllChiavateList() {
+        ArrayList<Chiavata> chiavate = new ArrayList<>();
+
+        ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(context);
+        PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(context);
+
+        chiavataDbAdapter.open();
+        personaDbAdapter.open();
+
+        Cursor chiavataCursor = chiavataDbAdapter.fetchAllChiavate();
+
+        if (chiavataCursor != null && chiavataCursor.moveToFirst()) {
+            int idIndex = chiavataCursor.getColumnIndex("ID_Rapporti");
+            int votoIndex = chiavataCursor.getColumnIndex("votazione");
+            int luogoIndex = chiavataCursor.getColumnIndex("luogo");
+            int postoIndex = chiavataCursor.getColumnIndex("posto");
+            int dataIndex = chiavataCursor.getColumnIndex("data_rapporto");
+            int descrizioneIndex = chiavataCursor.getColumnIndex("descrizione");
+            int personaIdIndex = chiavataCursor.getColumnIndex("ID_Persona");
+
+            do {
+                Chiavata chiavata = new Chiavata();
+
+                if (idIndex >= 0) chiavata.setId(chiavataCursor.getInt(idIndex));
+                if (votoIndex >= 0) chiavata.setVoto(chiavataCursor.getFloat(votoIndex));
+                if (luogoIndex >= 0) chiavata.setLuogo(chiavataCursor.getString(luogoIndex));
+                if (postoIndex >= 0) chiavata.setPosto(chiavataCursor.getString(postoIndex));
+                if (dataIndex >= 0) chiavata.setData(chiavataCursor.getString(dataIndex));
+                if (descrizioneIndex >= 0) chiavata.setDescrizione(chiavataCursor.getString(descrizioneIndex));
+
+                // Fetch Persona associated with the Chiavata
+                if (personaIdIndex >= 0) {
+                    int personaId = chiavataCursor.getInt(personaIdIndex);
+                    Cursor personaCursor = personaDbAdapter.fetchPersonaById(personaId);
+                    if (personaCursor != null && personaCursor.moveToFirst()) {
+                        Persona persona = new Persona(
+                                personaCursor.getString(personaCursor.getColumnIndex("nome")),
+                                personaCursor.getString(personaCursor.getColumnIndex("genere"))
+                        );
+                        persona.setId(personaId);
+                        chiavata.setPersona(persona);
+                        personaCursor.close();
+                    }
+                }
+
+                chiavate.add(chiavata);
+            } while (chiavataCursor.moveToNext());
+        }
+
+        if (chiavataCursor != null) chiavataCursor.close();
+        personaDbAdapter.close();
+        chiavataDbAdapter.close();
+
+        return chiavate;
     }
 }
