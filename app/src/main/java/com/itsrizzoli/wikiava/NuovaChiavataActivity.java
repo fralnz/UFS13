@@ -1,10 +1,12 @@
 package com.itsrizzoli.wikiava;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RatingBar;
@@ -22,8 +24,10 @@ import com.itsrizzoli.wikiava.database.PersonaDbAdapter;
 import com.itsrizzoli.wikiava.database.ChiavataDbAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NuovaChiavataActivity extends AppCompatActivity {
+    private EditText dateEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +42,7 @@ public class NuovaChiavataActivity extends AppCompatActivity {
         EditText nomeEditText = findViewById(R.id.nome);
         EditText luogoEditText = findViewById(R.id.luogo);
         MultiAutoCompleteTextView selezionaTag = findViewById(R.id.selezionaTag);
-        EditText dataEditText = findViewById(R.id.data);
+        dateEditText = findViewById(R.id.data);
         RatingBar votoBar = findViewById(R.id.ratingExperience);
 
         ArrayList<String> tags = DataList.getInstance().getTags();
@@ -49,13 +53,39 @@ public class NuovaChiavataActivity extends AppCompatActivity {
 
         Button salvaButton = findViewById(R.id.salvaButton);
 
+        // codice preso da https://www.geeksforgeeks.org/how-to-popup-datepicker-while-clicking-on-edittext-in-android/
+        dateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Calendar c = Calendar.getInstance();
+
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        NuovaChiavataActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                dateEditText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        },
+                        year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
         salvaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Collect data from input fields
                 String nome = nomeEditText.getText().toString();
                 String luogo = luogoEditText.getText().toString();
-                String data = dataEditText.getText().toString();
+                String data = dateEditText.getText().toString();
                 float voto = votoBar.getRating();
 
                 // Initialize tags
