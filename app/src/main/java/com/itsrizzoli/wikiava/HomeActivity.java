@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.itsrizzoli.wikiava.components.ChiavataAdapter;
 import com.itsrizzoli.wikiava.database.ChiavataDbAdapter;
 import com.itsrizzoli.wikiava.models.Chiavata;
 import com.itsrizzoli.wikiava.models.DataList;
@@ -81,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         dbAdapter.close();
 
-        ArrayAdapter<Chiavata> chiavateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, chiavate);
+        ChiavataAdapter chiavateAdapter = new ChiavataAdapter(this, chiavate);
         listView.setAdapter(chiavateAdapter);
     }
 }
