@@ -1,12 +1,14 @@
 package com.itsrizzoli.wikiava.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.Person;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ import com.itsrizzoli.wikiava.database.ChiavataDbAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class NuovaChiavataFragment extends Fragment {
     private EditText dateEditText;
@@ -49,11 +52,19 @@ public class NuovaChiavataFragment extends Fragment {
             return insets;
         });
 
-        EditText nomeEditText = view.findViewById(R.id.nome);
+        AutoCompleteTextView insertNome = view.findViewById(R.id.nome);
         EditText luogoEditText = view.findViewById(R.id.luogo);
         MultiAutoCompleteTextView selezionaTag = view.findViewById(R.id.selezionaTag);
         dateEditText = view.findViewById(R.id.data);
         RatingBar votoBar = view.findViewById(R.id.ratingExperience);
+
+        PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(this.getContext());
+        personaDbAdapter.open();
+        List<String> nomi = personaDbAdapter.getAllPersoneNames();
+        personaDbAdapter.close();
+
+        ArrayAdapter<String> nomiAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, nomi);
+        insertNome.setAdapter(nomiAdapter);
 
         ArrayList<String> tags = DataList.getInstance().getTags();
         ArrayAdapter<String> tagsAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, tags);
@@ -86,7 +97,7 @@ public class NuovaChiavataFragment extends Fragment {
         salvaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nome = nomeEditText.getText().toString();
+                String nome = insertNome.getText().toString();
                 String luogo = luogoEditText.getText().toString();
                 String data = dateEditText.getText().toString();
                 float voto = votoBar.getRating();

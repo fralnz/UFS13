@@ -90,12 +90,31 @@ public class PersonaDbAdapter {
         return persona;
     }
 
-
     public Cursor fetchPersonaById(long id) {
         Cursor cursor = database.query(TABLE_PERSONA, null, KEY_ID + "=" + id, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursor;
+    }
+
+    public List<String> getAllPersoneNames() {
+        List<String> namesList = new ArrayList<>();
+        Cursor cursor = database.query(TABLE_PERSONA,
+                new String[]{KEY_NOME},
+                null,
+                null,
+                null,
+                null,
+                null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                int nameColumnIndex = cursor.getColumnIndex(KEY_NOME);
+                String name = cursor.getString(nameColumnIndex);
+                namesList.add(name);
+            }
+            cursor.close();
+        }
+        return namesList;
     }
 }
