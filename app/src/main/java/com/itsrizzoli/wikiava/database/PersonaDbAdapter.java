@@ -70,6 +70,26 @@ public class PersonaDbAdapter {
         );
     }
 
+    public Persona getPersonaByName(String nome) {
+        Persona persona = null;
+        Cursor cursor = database.query(TABLE_PERSONA,
+                new String[]{"ID_Persona", "nome", "genere"},
+                "nome = ?",
+                new String[]{nome},
+                null,
+                null,
+                null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex("ID_Persona"));
+            String genere = cursor.getString(cursor.getColumnIndex("genere"));
+            persona = new Persona(nome, genere);
+            persona.setId(id);
+            cursor.close();
+        }
+        return persona;
+    }
+
 
     public Cursor fetchPersonaById(long id) {
         Cursor cursor = database.query(TABLE_PERSONA, null, KEY_ID + "=" + id, null, null, null, null);

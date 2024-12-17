@@ -96,31 +96,44 @@ public class NuovaChiavataFragment extends Fragment {
                     selectedTags.add(tag.trim());
                 }
 
-                Persona persona = new Persona(nome, "Unknown");
-
-                if (nome.isBlank() || nome.isEmpty() || luogo.isBlank() || luogo.isEmpty() || data.isBlank() || data.isEmpty() || persona.getNome().isBlank() || persona.getNome().isEmpty()) {
+                if (nome.isBlank() || nome.isEmpty() || luogo.isBlank() || luogo.isEmpty() || data.isBlank() || data.isEmpty()) {
                     Toast.makeText(getContext(), "Inserisci tutti i campi", Toast.LENGTH_SHORT).show();
                 } else {
                     PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(getActivity());
                     personaDbAdapter.open();
-                    long personaId = personaDbAdapter.createPersona(persona);
+
+                    // Check if a Persona with the given name already exists
+                    Persona persona = personaDbAdapter.getPersonaByName(nome);
+
+                    if (persona == null) {
+                        // Create a new Persona if it doesn't exist
+                        persona = new Persona(nome, "Unknown");
+                        long personaId = personaDbAdapter.createPersona(persona);
+
+                        if (personaId > 0) {
+                            persona.setId((int) personaId);
+                        } else {
+                            Toast.makeText(getContext(), "Errore nel salvataggio della Persona", Toast.LENGTH_SHORT).show();
+                            personaDbAdapter.close();
+                            return;
+                        }
+                    }
+
                     personaDbAdapter.close();
 
-                    if (personaId > 0) {
-                        persona.setId((int) personaId);
+                    // Create a Chiavata linked to the Persona
+                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
 
-                        Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
-
-                        ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
-                        chiavataDbAdapter.open();
-                        chiavataDbAdapter.createChiavata(nuovaChiavata);
-                        chiavataDbAdapter.close();
-                    }
+                    ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
+                    chiavataDbAdapter.open();
+                    chiavataDbAdapter.createChiavata(nuovaChiavata);
+                    chiavataDbAdapter.close();
 
                     Toast.makeText(getContext(), "Chiavata Registrata!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         return view;
     }
