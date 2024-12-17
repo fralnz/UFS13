@@ -1,8 +1,6 @@
 package com.itsrizzoli.wikiava.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Person;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
 import com.itsrizzoli.wikiava.MainActivity;
 import com.itsrizzoli.wikiava.R;
+import com.itsrizzoli.wikiava.LocationManager;
 import com.itsrizzoli.wikiava.models.Chiavata;
 import com.itsrizzoli.wikiava.models.DataList;
 import com.itsrizzoli.wikiava.models.Persona;
@@ -70,6 +69,15 @@ public class NuovaChiavataFragment extends Fragment {
         ArrayAdapter<String> tagsAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, tags);
         selezionaTag.setAdapter(tagsAdapter);
         selezionaTag.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        // Assuming you've already got your location
+        String locationString = LocationManager.getCurrentLocationString(this.getContext());
+        String[] coords = locationString.split(",");
+        double latitude = Double.parseDouble(coords[0]);
+        double longitude = Double.parseDouble(coords[1]);
+
+        String addressName = LocationManager.getAddressName(this.getContext(), latitude, longitude);
+        luogoEditText.setText(addressName);
 
         Button salvaButton = view.findViewById(R.id.salvaButton);
 
