@@ -20,8 +20,6 @@
         android:textSize="24sp"
         android:layout_alignParentTop="true" />
 
-
-
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
@@ -32,8 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
             <TextView
                 android:id="@+id/nomeText"
                 android:layout_width="match_parent"
@@ -41,7 +37,6 @@
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="20dp"
                 android:text="Nome/Nomignolo:" />
-
             <EditText
                 android:id="@+id/nome"
                 android:layout_width="match_parent"
@@ -59,8 +54,6 @@
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
                 android:text="Luogo:" />
-
-
             <EditText
                 android:id="@+id/luogo"
                 android:layout_width="match_parent"
@@ -186,7 +179,7 @@
                 android:layout_marginTop="10dp"
                 android:ems="100"
                 android:inputType="text"
-                android:textColor="#FFFFFF"
+                android:textColor="#FFFFFF" />
 
 
 
