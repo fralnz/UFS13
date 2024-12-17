@@ -35,25 +35,6 @@ public class HomeFragment extends Fragment {
             return insets;
         });
 
-        Button chiavaButton = view.findViewById(R.id.chiavaButton);
-        Button personeButton = view.findViewById(R.id.personeButton);
-
-        chiavaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent ricettaIntent = new Intent(getActivity(), NuovaChiavataFragment.class);
-                startActivity(ricettaIntent);
-            }
-        });
-
-        personeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent ricettaIntent = new Intent(getActivity(), PersoneFragment.class);
-                startActivity(ricettaIntent);
-            }
-        });
-
         ListView listView = view.findViewById(R.id.chiavateListView);
 
         ChiavataDbAdapter repository = new ChiavataDbAdapter(getActivity());
