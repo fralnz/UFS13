@@ -96,7 +96,7 @@ public class NuovaChiavataFragment extends Fragment {
                     selectedTags.add(tag.trim());
                 }
 
-                if (nome.isBlank() || nome.isEmpty() || luogo.isBlank() || luogo.isEmpty() || data.isBlank() || data.isEmpty()) {
+                if (nome.isBlank() || luogo.isBlank() || data.isBlank()) {
                     Toast.makeText(getContext(), "Inserisci tutti i campi", Toast.LENGTH_SHORT).show();
                 } else {
                     PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(getActivity());
@@ -104,32 +104,28 @@ public class NuovaChiavataFragment extends Fragment {
 
                     // Check if a Persona with the given name already exists
                     Persona persona = personaDbAdapter.getPersonaByName(nome);
-
                     if (persona == null) {
-                        // Create a new Persona if it doesn't exist
                         persona = new Persona(nome, "Unknown");
                         long personaId = personaDbAdapter.createPersona(persona);
-
                         if (personaId > 0) {
                             persona.setId((int) personaId);
-                        } else {
-                            Toast.makeText(getContext(), "Errore nel salvataggio della Persona", Toast.LENGTH_SHORT).show();
-                            personaDbAdapter.close();
-                            return;
                         }
                     }
-
                     personaDbAdapter.close();
 
-                    // Create a Chiavata linked to the Persona
+                    // Create and save Chiavata
                     Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
-
                     ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
                     chiavataDbAdapter.open();
                     chiavataDbAdapter.createChiavata(nuovaChiavata);
                     chiavataDbAdapter.close();
 
                     Toast.makeText(getContext(), "Chiavata Registrata!", Toast.LENGTH_SHORT).show();
+
+                    // Switch to another tab
+                    if (getActivity() instanceof MainActivity) {
+                        ((MainActivity) getActivity()).switchToTab(0); // Switch to tab at index 1
+                    }
                 }
             }
         });

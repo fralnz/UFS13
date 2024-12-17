@@ -49,4 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void switchToTab(int tabIndex) {
+        if (tabLayout != null && viewPager2 != null) {
+            viewPager2.setCurrentItem(tabIndex, true); // Smooth scroll to the specified tab
+        }
+    }
+
 }
