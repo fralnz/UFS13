@@ -70,7 +70,6 @@ public class NuovaChiavataFragment extends Fragment {
         selezionaTag.setAdapter(tagsAdapter);
         selezionaTag.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        // Assuming you've already got your location
         String locationString = LocationManager.getCurrentLocationString(this.getContext());
         String[] coords = locationString.split(",");
         double latitude = Double.parseDouble(coords[0]);
