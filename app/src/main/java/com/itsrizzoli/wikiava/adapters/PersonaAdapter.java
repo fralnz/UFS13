@@ -1,4 +1,4 @@
-package com.itsrizzoli.wikiava.components;
+package com.itsrizzoli.wikiava.adapters;
 
 import android.content.Context;
 import android.database.Cursor;

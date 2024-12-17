@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Wikiava"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NuovaChiavataActivity"
+            android:name=".fragments.NuovaChiavataFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PersoneActivity"
+            android:name=".fragments.PersoneFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
