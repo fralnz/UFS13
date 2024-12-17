@@ -60,8 +60,16 @@ public class PersonaDbAdapter {
     }
 
     public Cursor fetchAllPersone() {
-        return database.query(TABLE_PERSONA, null, null, null, null, null, null);
+        return database.query(TABLE_PERSONA,
+                new String[]{"ID_Persona AS _id", "nome", "genere"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
     }
+
 
     public Cursor fetchPersonaById(long id) {
         Cursor cursor = database.query(TABLE_PERSONA, null, KEY_ID + "=" + id, null, null, null, null);

@@ -19,10 +19,10 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
     private Context context;
     private List<Chiavata> chiavate;
 
-    private static class ViewHolder {
-        TextView personaTextView;
-        TextView luogoTextView;
-        TextView postoTextView;
+    static class ViewHolder {
+        TextView nomeTextView;
+        TextView genereTextView;
+        TextView bodyCountTextView;
         TextView dataTextView;
         TextView votoTextView;
         TextView descrizioneTextView;
@@ -44,9 +44,9 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
             convertView = inflater.inflate(R.layout.chiavata_list_item, parent, false);
 
             viewHolder = new ViewHolder();
-            viewHolder.personaTextView = convertView.findViewById(R.id.personaTextView);
-            viewHolder.luogoTextView = convertView.findViewById(R.id.luogoTextView);
-            viewHolder.postoTextView = convertView.findViewById(R.id.postoTextView);
+            viewHolder.nomeTextView = convertView.findViewById(R.id.personaTextView);
+            viewHolder.genereTextView = convertView.findViewById(R.id.luogoTextView);
+            viewHolder.bodyCountTextView = convertView.findViewById(R.id.postoTextView);
             viewHolder.dataTextView = convertView.findViewById(R.id.dataTextView);
             viewHolder.votoTextView = convertView.findViewById(R.id.votoTextView);
             viewHolder.descrizioneTextView = convertView.findViewById(R.id.descrizioneTextView);
@@ -59,11 +59,11 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
         Chiavata chiavata = chiavate.get(position);
 
         // controllo se la persona esiste (puo dare problemi ogni tanto)
-        viewHolder.personaTextView.setText(
+        viewHolder.nomeTextView.setText(
                 chiavata.getPersona() != null ? chiavata.getPersona().getNome() : "N/A"
         );
-        viewHolder.luogoTextView.setText("Luogo: " + chiavata.getLuogo());
-        viewHolder.postoTextView.setText("Posto: " + chiavata.getPosto());
+        viewHolder.genereTextView.setText("Luogo: " + chiavata.getLuogo());
+        viewHolder.bodyCountTextView.setText("Posto: " + chiavata.getPosto());
         viewHolder.dataTextView.setText("Data: " + chiavata.getData());
         viewHolder.votoTextView.setText("Voto: " + String.format("%.1f", chiavata.getVoto()));
         viewHolder.descrizioneTextView.setText("Descrizione: " + chiavata.getDescrizione());
