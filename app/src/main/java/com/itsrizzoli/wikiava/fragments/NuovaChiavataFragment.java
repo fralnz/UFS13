@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
 import com.itsrizzoli.wikiava.MainActivity;
 import com.itsrizzoli.wikiava.R;
 import com.itsrizzoli.wikiava.models.Chiavata;
@@ -33,6 +35,8 @@ import java.util.Calendar;
 
 public class NuovaChiavataFragment extends Fragment {
     private EditText dateEditText;
+    private TabLayout tabLayout;
+    private Button changeTabButton;
 
     @Nullable
     @Override
@@ -94,24 +98,27 @@ public class NuovaChiavataFragment extends Fragment {
 
                 Persona persona = new Persona(nome, "Unknown");
 
-                PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(getActivity());
-                personaDbAdapter.open();
-                long personaId = personaDbAdapter.createPersona(persona);
-                personaDbAdapter.close();
+                if (nome.isBlank() || nome.isEmpty() || luogo.isBlank() || luogo.isEmpty() || data.isBlank() || data.isEmpty() || persona.getNome().isBlank() || persona.getNome().isEmpty()) {
+                    Toast.makeText(getContext(), "Inserisci tutti i campi", Toast.LENGTH_SHORT).show();
+                } else {
+                    PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(getActivity());
+                    personaDbAdapter.open();
+                    long personaId = personaDbAdapter.createPersona(persona);
+                    personaDbAdapter.close();
 
-                if (personaId > 0) {
-                    persona.setId((int) personaId);
+                    if (personaId > 0) {
+                        persona.setId((int) personaId);
 
-                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
+                        Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
 
-                    ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
-                    chiavataDbAdapter.open();
-                    chiavataDbAdapter.createChiavata(nuovaChiavata);
-                    chiavataDbAdapter.close();
+                        ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
+                        chiavataDbAdapter.open();
+                        chiavataDbAdapter.createChiavata(nuovaChiavata);
+                        chiavataDbAdapter.close();
+                    }
+
+                    Toast.makeText(getContext(), "Chiavata Registrata!", Toast.LENGTH_SHORT).show();
                 }
-
-                Intent homeIntent = new Intent(getActivity(), MainActivity.class);
-                startActivity(homeIntent);
             }
         });
 
