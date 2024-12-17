@@ -10,6 +10,8 @@ import com.itsrizzoli.wikiava.fragments.NuovaChiavataFragment;
 import com.itsrizzoli.wikiava.fragments.PersoneFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
+    private long[] itemIds = {0, 1, 2}; // Unique IDs for each fragment
+
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -17,7 +19,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new HomeFragment();
             case 1:
@@ -32,5 +34,26 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         return 3;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return itemIds[position];
+    }
+
+    @Override
+    public boolean containsItem(long itemId) {
+        for (long id : itemIds) {
+            if (id == itemId) return true;
+        }
+        return false;
+    }
+
+    public void refreshFragments() {
+        // Increment item IDs to force recreation
+        for (int i = 0; i < itemIds.length; i++) {
+            itemIds[i] = System.currentTimeMillis() + i;
+        }
+        notifyDataSetChanged();
     }
 }

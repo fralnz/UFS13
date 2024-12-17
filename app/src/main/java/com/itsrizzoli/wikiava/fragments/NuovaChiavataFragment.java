@@ -102,7 +102,6 @@ public class NuovaChiavataFragment extends Fragment {
                     PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(getActivity());
                     personaDbAdapter.open();
 
-                    // Check if a Persona with the given name already exists
                     Persona persona = personaDbAdapter.getPersonaByName(nome);
                     if (persona == null) {
                         persona = new Persona(nome, "Unknown");
@@ -113,7 +112,6 @@ public class NuovaChiavataFragment extends Fragment {
                     }
                     personaDbAdapter.close();
 
-                    // Create and save Chiavata
                     Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
                     ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
                     chiavataDbAdapter.open();
@@ -122,9 +120,10 @@ public class NuovaChiavataFragment extends Fragment {
 
                     Toast.makeText(getContext(), "Chiavata Registrata!", Toast.LENGTH_SHORT).show();
 
-                    // Switch to another tab
                     if (getActivity() instanceof MainActivity) {
-                        ((MainActivity) getActivity()).switchToTab(0); // Switch to tab at index 1
+                        MainActivity mainActivity = (MainActivity) getActivity();
+                        mainActivity.switchToTab(0); // Switch to HomeFragment
+                        mainActivity.getViewPagerAdapter().refreshFragments(); // Refresh all fragments
                     }
                 }
             }

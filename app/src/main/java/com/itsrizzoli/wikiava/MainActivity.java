@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tabLayout = findViewById(R.id.tab_layout);
-        viewPager2 =findViewById(R.id.view_pager);
+        viewPager2 = findViewById(R.id.view_pager);
         myViewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(myViewPagerAdapter);
 
@@ -55,5 +55,10 @@ public class MainActivity extends AppCompatActivity {
             viewPager2.setCurrentItem(tabIndex, true); // Smooth scroll to the specified tab
         }
     }
+
+    public ViewPagerAdapter getViewPagerAdapter() {
+        return myViewPagerAdapter;
+    }
+
 
 }
