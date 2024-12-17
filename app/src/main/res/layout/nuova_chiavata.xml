@@ -165,55 +165,38 @@
                 android:textColor="#FFFFFF"
                 />
 
+            <!-- non tocco sopra -->
 
             <TextView
-                android:id="@+id/bondageText"
+                android:id="@+id/genereText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/descrizione"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
-                android:text="Bondage:"
+                android:text="Genere:"
                 android:textColor="#FFFFFF"
                 />
 
-
-            <MultiAutoCompleteTextView
-                android:id="@+id/bondage"
-                android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/genere"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bondageText"
+                android:layout_below="@id/genereText"
                 android:layout_marginTop="10dp"
+                android:ems="100"
+                android:inputType="text"
                 android:textColor="#FFFFFF"
-                />
-
-            <TextView
-                android:id="@+id/giochiText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/bondage"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="1dp"
-                android:text="Giochi:"
-                android:textColor="#FFFFFF"
-                />
 
 
-            <MultiAutoCompleteTextView
-                android:id="@+id/giochi"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/giochiText"
-                android:layout_marginTop="10dp"
-                android:textColor="#FFFFFF"
-                />
 
 
+            <!-- non tocco sotto -->
             <TextView
                 android:id="@+id/ratingExperienceText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/giochi"
+                android:layout_below="@id/genere"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
                 android:text="Votazione:"
