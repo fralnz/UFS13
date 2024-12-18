@@ -8,6 +8,14 @@
     android:background="#1C1C1C"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Elenco Chiavate:"
+        android:textSize="16sp" />
+
     <ListView
         android:id="@+id/chiavateListView"
         android:layout_width="wrap_content"
