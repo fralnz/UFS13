@@ -25,17 +25,14 @@ public class PersonaAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // Get data from the cursor
         String nome = cursor.getString(cursor.getColumnIndex("nome"));
         String id = cursor.getString(cursor.getColumnIndex("_id"));
-        String genere = dataList.getBodyCountMap().get(Integer.parseInt(id)).toString();
+        String bodyCount = dataList.getBodyCountMap().get(Integer.parseInt(id)).toString();
 
-        // Find views in the layout
         TextView nomeTextView = view.findViewById(R.id.nomeTextView);
-        TextView genereTextView = view.findViewById(R.id.genereTextView);
+        TextView bodyCountTextView = view.findViewById(R.id.bodyCountTextView);
 
-        // Bind data to the views
         nomeTextView.setText(nome);
-        genereTextView.setText(genere);
+        bodyCountTextView.setText("Body count: " + bodyCount);
     }
 }
