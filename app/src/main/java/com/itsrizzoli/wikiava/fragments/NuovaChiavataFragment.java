@@ -54,6 +54,7 @@ public class NuovaChiavataFragment extends Fragment {
         AutoCompleteTextView insertNome = view.findViewById(R.id.nome);
         EditText luogoEditText = view.findViewById(R.id.luogo);
         MultiAutoCompleteTextView selezionaTag = view.findViewById(R.id.selezionaTag);
+        EditText descrizioneEditText = view.findViewById(R.id.descrizione);
         dateEditText = view.findViewById(R.id.data);
         RatingBar votoBar = view.findViewById(R.id.ratingExperience);
 
@@ -107,6 +108,7 @@ public class NuovaChiavataFragment extends Fragment {
                 String nome = insertNome.getText().toString();
                 String luogo = luogoEditText.getText().toString();
                 String data = dateEditText.getText().toString();
+                String descrizione = descrizioneEditText.getText().toString();
                 float voto = votoBar.getRating();
 
                 ArrayList<String> selectedTags = new ArrayList<>();
@@ -130,7 +132,7 @@ public class NuovaChiavataFragment extends Fragment {
                     }
                     personaDbAdapter.close();
 
-                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, "", selectedTags, 6, 33, 6);
+                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, descrizione, selectedTags, 6, 33, 6);
                     ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
                     chiavataDbAdapter.open();
                     chiavataDbAdapter.createChiavata(nuovaChiavata);

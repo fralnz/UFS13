@@ -62,11 +62,11 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
         viewHolder.nomeTextView.setText(
                 chiavata.getPersona() != null ? chiavata.getPersona().getNome() : "N/A"
         );
-        viewHolder.genereTextView.setText("Luogo: " + chiavata.getLuogo());
-        viewHolder.bodyCountTextView.setText("Posto: " + chiavata.getPosto());
-        viewHolder.dataTextView.setText("Data: " + chiavata.getData());
-        viewHolder.votoTextView.setText("Voto: " + String.format("%.1f", chiavata.getVoto()));
-        viewHolder.descrizioneTextView.setText("Descrizione: " + chiavata.getDescrizione());
+        viewHolder.genereTextView.setText(chiavata.getLuogo());
+        viewHolder.bodyCountTextView.setText(chiavata.getPosto());
+        viewHolder.dataTextView.setText(chiavata.getData());
+        viewHolder.votoTextView.setText(String.format("%.1f", chiavata.getVoto()));
+        viewHolder.descrizioneTextView.setText(chiavata.getDescrizione());
 
         return convertView;
     }

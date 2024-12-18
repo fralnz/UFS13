@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="20dp"
-                android:text="Nome/Nomignolo:" />
+                android:text="Nome:"/>
             <AutoCompleteTextView
                 android:id="@+id/nome"
                 android:layout_width="match_parent"
@@ -44,7 +44,8 @@
                 android:layout_below="@id/nomeText"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
-                android:inputType="text" />
+                android:inputType="text"
+                android:hint="Inserisci la persona" />
 
             <TextView
                 android:id="@+id/luogoText"
@@ -62,7 +63,8 @@
                 android:layout_below="@id/luogoText"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="text"
+                android:hint="Inserisci il luogo" />
 
             <TextView
                 android:id="@+id/postText"
@@ -85,6 +87,7 @@
                 android:ems="10"
                 android:inputType="text"
                 android:textColor="#FFFFFF"
+                android:hint="Inserisci il posto"
                 />
 
             <TextView
@@ -106,6 +109,7 @@
                 android:layout_below="@id/selezionaTagText"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
+                android:hint="Inserisci i tag"
                 />
 
             <TextView
@@ -156,40 +160,14 @@
                 android:ems="10"
                 android:inputType="text"
                 android:textColor="#FFFFFF"
+                android:hint="Descrivi la chiavata"
                 />
 
-            <!-- non tocco sopra -->
-
-            <TextView
-                android:id="@+id/genereText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/descrizione"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="1dp"
-                android:text="Genere:"
-                android:textColor="#FFFFFF"
-                />
-
-            <EditText
-                android:id="@+id/genere"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/genereText"
-                android:layout_marginTop="10dp"
-                android:ems="100"
-                android:inputType="text"
-                android:textColor="#FFFFFF" />
-
-
-
-
-            <!-- non tocco sotto -->
             <TextView
                 android:id="@+id/ratingExperienceText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/genere"
+                android:layout_below="@id/descrizione"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="1dp"
                 android:text="Votazione:"
@@ -214,7 +192,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ratingExperience"
                 android:text="Salva" />
-
 
 
         </RelativeLayout>
