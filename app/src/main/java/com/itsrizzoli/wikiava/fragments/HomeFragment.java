@@ -1,12 +1,15 @@
 package com.itsrizzoli.wikiava.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +45,39 @@ public class HomeFragment extends Fragment {
 
         ChiavataAdapter chiavateAdapter = new ChiavataAdapter(getActivity(), chiavate);
         listView.setAdapter(chiavateAdapter);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected Chiavata
+                Chiavata selectedChiavata = chiavate.get(position);
+
+                // Show confirmation dialog
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Conferma eliminazione")
+                        .setMessage("Sei sicuro di voler eliminare questa chiavata?")
+                        .setPositiveButton("Conferma", (dialog, which) -> {
+                            // Delete Chiavata from database
+                            ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
+                            chiavataDbAdapter.open();
+                            boolean success = chiavataDbAdapter.deleteChiavata(selectedChiavata.getId());
+                            chiavataDbAdapter.close();
+
+                            if (success) {
+                                // Remove Chiavata from the list and update the adapter
+                                chiavate.remove(position);
+                                chiavateAdapter.notifyDataSetChanged();
+                                Toast.makeText(getActivity(), "Chiavata eliminata", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "Errore durante l'eliminazione", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Annulla", null)
+                        .show();
+
+                return true; // Indicate that the long-press has been handled
+            }
+        });
 
         return view;
     }
