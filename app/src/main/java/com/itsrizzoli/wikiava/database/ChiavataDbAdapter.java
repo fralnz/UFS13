@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.itsrizzoli.wikiava.models.Chiavata;
+import com.itsrizzoli.wikiava.models.DataList;
 import com.itsrizzoli.wikiava.models.Persona;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class ChiavataDbAdapter {
 
     public Cursor fetchAllChiavate() {
         return database.query(TABLE_CHIAVATA,
-                new String[] {KEY_ID, KEY_PERSONA_ID, KEY_VOTO, KEY_LUOGO, KEY_POSTO, KEY_DATA, KEY_DESCRIZIONE},
+                new String[]{KEY_ID, KEY_PERSONA_ID, KEY_VOTO, KEY_LUOGO, KEY_POSTO, KEY_DATA, KEY_DESCRIZIONE},
                 null, null, null, null, null);
     }
 
@@ -84,6 +85,8 @@ public class ChiavataDbAdapter {
 
     public ArrayList<Chiavata> fetchAllChiavateList() {
         ArrayList<Chiavata> chiavate = new ArrayList<>();
+        DataList dataList = DataList.getInstance();
+        dataList.getBodyCountMap().clear();
 
         ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(context);
         PersonaDbAdapter personaDbAdapter = new PersonaDbAdapter(context);
@@ -110,11 +113,11 @@ public class ChiavataDbAdapter {
                 if (luogoIndex >= 0) chiavata.setLuogo(chiavataCursor.getString(luogoIndex));
                 if (postoIndex >= 0) chiavata.setPosto(chiavataCursor.getString(postoIndex));
                 if (dataIndex >= 0) chiavata.setData(chiavataCursor.getString(dataIndex));
-                if (descrizioneIndex >= 0) chiavata.setDescrizione(chiavataCursor.getString(descrizioneIndex));
+                if (descrizioneIndex >= 0)
+                    chiavata.setDescrizione(chiavataCursor.getString(descrizioneIndex));
 
-                // Fetch Persona associated with the Chiavata
+                int personaId = chiavataCursor.getInt(personaIdIndex);
                 if (personaIdIndex >= 0) {
-                    int personaId = chiavataCursor.getInt(personaIdIndex);
                     Cursor personaCursor = personaDbAdapter.fetchPersonaById(personaId);
                     if (personaCursor != null && personaCursor.moveToFirst()) {
                         Persona persona = new Persona(
@@ -128,6 +131,12 @@ public class ChiavataDbAdapter {
                 }
 
                 chiavate.add(chiavata);
+                if (dataList.getBodyCountMap().containsKey(personaId)) {
+                    int currentValue = dataList.getBodyCountMap().get(personaId);
+                    dataList.getBodyCountMap().put(personaId, currentValue + 1);
+                } else {
+                    dataList.getBodyCountMap().put(personaId, 1);
+                }
             } while (chiavataCursor.moveToNext());
         }
 

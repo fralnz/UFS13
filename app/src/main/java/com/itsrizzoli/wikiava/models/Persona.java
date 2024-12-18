@@ -10,17 +10,6 @@ public class Persona {
     private String nome;
     private String genere;
 
-    public int getBodyCount() {
-        ArrayList<Chiavata> chiavate = DataList.getInstance().getChiavate();
-        int bodyCount = 0;
-        for (Chiavata chiavata : chiavate) {
-            if (chiavata.getPersona().equals(this)) {
-                bodyCount++;
-            }
-        }
-        return bodyCount;
-    }
-
     public Persona(String nome) {
         this.nome = nome;
     }
@@ -67,10 +56,12 @@ public class Persona {
         return Objects.hash(id, nome, genere);
     }
 
-    @NonNull
     @Override
     public String toString() {
-        return nome + ' ' +
-                "Scopate = " + getBodyCount();
+        return "Persona{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", genere='" + genere + '\'' +
+                '}';
     }
 }

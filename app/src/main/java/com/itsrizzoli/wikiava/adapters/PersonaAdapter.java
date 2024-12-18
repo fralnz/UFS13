@@ -9,8 +9,10 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.itsrizzoli.wikiava.R;
+import com.itsrizzoli.wikiava.models.DataList;
 
 public class PersonaAdapter extends CursorAdapter {
+    DataList dataList = DataList.getInstance();
     public PersonaAdapter(Context context, Cursor c) {
         super(context, c, 0);
     }
@@ -25,7 +27,8 @@ public class PersonaAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         // Get data from the cursor
         String nome = cursor.getString(cursor.getColumnIndex("nome"));
-        String genere = cursor.getString(cursor.getColumnIndex("genere"));
+        String id = cursor.getString(cursor.getColumnIndex("_id"));
+        String genere = dataList.getBodyCountMap().get(Integer.parseInt(id)).toString();
 
         // Find views in the layout
         TextView nomeTextView = view.findViewById(R.id.nomeTextView);
