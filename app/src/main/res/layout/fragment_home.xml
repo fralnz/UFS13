@@ -8,16 +8,6 @@
     android:background="#1C1C1C"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="WIKIAVA"
-        android:textColor="#FF5722"
-        android:textSize="24sp" />
-
     <ListView
         android:id="@+id/chiavateListView"
         android:layout_width="wrap_content"
