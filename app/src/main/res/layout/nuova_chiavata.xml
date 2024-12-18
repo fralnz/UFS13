@@ -161,6 +161,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ratingExperienceText"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="86dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="85dp"
                 android:max="100"
                 android:numStars="5"
                 android:rating="5"
@@ -171,6 +176,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ratingExperience"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="163dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="160dp"
                 android:text="Salva" />
 
 
