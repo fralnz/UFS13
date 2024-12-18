@@ -68,6 +68,10 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
         viewHolder.votoTextView.setText(String.format("%.1f", chiavata.getVoto()));
         viewHolder.descrizioneTextView.setText(chiavata.getDescrizione());
 
+        if (chiavata.getDescrizione().isEmpty() || chiavata.getDescrizione().isBlank()){
+            viewHolder.descrizioneTextView.setVisibility(View.INVISIBLE);
+        }
+
         return convertView;
     }
 }
