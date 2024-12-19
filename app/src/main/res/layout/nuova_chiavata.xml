@@ -11,13 +11,14 @@
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">>
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Previous views remain unchanged -->
             <TextView
                 android:id="@+id/nomeText"
                 android:layout_width="match_parent"
@@ -66,7 +67,6 @@
                 android:text="Posto:"
                 android:textColor="#FFFFFF" />
 
-
             <EditText
                 android:id="@+id/posto"
                 android:layout_width="match_parent"
@@ -78,13 +78,14 @@
                 android:inputType="text"
                 android:textColor="#FFFFFF" />
 
+            <!-- Modified protezioni section -->
             <TextView
                 android:id="@+id/protezioniText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/posto"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginBottom="10dp"
                 android:text="Protezioni:"
                 android:textColor="#FFFFFF" />
 
@@ -92,10 +93,14 @@
                 android:id="@+id/protezioni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_below="@id/protezioniText"
-                android:layout_margin="10dp" />
+                android:layout_below="@id/posto"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/protezioniText"
+                android:minWidth="48dp"
+                android:textColor="#FFFFFF" />
 
+            <!-- Remaining views unchanged -->
             <TextView
                 android:id="@+id/selezionaTagText"
                 android:layout_width="match_parent"
@@ -105,7 +110,6 @@
                 android:layout_marginBottom="1dp"
                 android:text="Tag:"
                 android:textColor="#FFFFFF" />
-
 
             <MultiAutoCompleteTextView
                 android:id="@+id/selezionaTag"
@@ -141,7 +145,6 @@
                 android:inputType="date"
                 android:textColor="#FFFFFF" />
 
-
             <TextView
                 android:id="@+id/descrizioneText"
                 android:layout_width="match_parent"
@@ -173,7 +176,6 @@
                 android:text="Votazione:"
                 android:textColor="#FFFFFF" />
 
-
             <RatingBar
                 android:id="@+id/ratingExperience"
                 android:layout_width="wrap_content"
@@ -201,8 +203,6 @@
                 android:layout_marginEnd="160dp"
                 android:text="Salva" />
 
-
         </RelativeLayout>
     </ScrollView>
-
 </RelativeLayout>
