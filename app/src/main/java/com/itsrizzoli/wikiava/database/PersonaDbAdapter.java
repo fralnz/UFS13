@@ -22,7 +22,7 @@ public class PersonaDbAdapter {
     private static final String TABLE_PERSONA = "Persone";
     private static final String KEY_ID = "ID_Persona";
     private static final String KEY_NOME = "nome";
-    private static final String KEY_GENERE = "genere";
+    private static final String KEY_USATO_PROTEZIONI = "usato_protezioni";
 
     public PersonaDbAdapter(Context context) {
         this.context = context;
@@ -41,7 +41,6 @@ public class PersonaDbAdapter {
     private ContentValues createContentValues(Persona persona) {
         ContentValues values = new ContentValues();
         values.put(KEY_NOME, persona.getNome());
-        values.put(KEY_GENERE, persona.getGenere());
         return values;
     }
 

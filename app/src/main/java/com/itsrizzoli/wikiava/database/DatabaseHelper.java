@@ -28,12 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_RAPPORTI_LUOGO = "luogo";
     private static final String COLUMN_RAPPORTI_POSTO = "posto";
     private static final String COLUMN_RAPPORTI_DESCRIZIONE = "descrizione";
-    private static final String COLUMN_RAPPORTI_BONDAGE = "bondage";
-    private static final String COLUMN_RAPPORTI_GIOCHI = "giochi";
     private static final String COLUMN_RAPPORTI_DATA = "data_rapporto";
     private static final String COLUMN_RAPPORTI_VOTAZIONE = "votazione";
     private static final String COLUMN_RAPPORTI_PERSONA_ID = "ID_Persona";
     private static final String COLUMN_RAPPORTI_TAGS_ID = "ID_Tags";
+    private static final String COLUMN_RAPPORTI_USATO_PROTEZIONI = "usato_protezioni";
 
     private static final String CREATE_TABLE_RAPPORTI = "CREATE TABLE " + TABLE_RAPPORTI + " ("
             + COLUMN_RAPPORTI_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -41,12 +40,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_RAPPORTI_LUOGO + " VARCHAR(100), "
             + COLUMN_RAPPORTI_POSTO + " VARCHAR(100), "
             + COLUMN_RAPPORTI_DESCRIZIONE + " TEXT, "
-            + COLUMN_RAPPORTI_BONDAGE + " VARCHAR(100), "
-            + COLUMN_RAPPORTI_GIOCHI + " VARCHAR(100), "
             + COLUMN_RAPPORTI_DATA + " DATE, "
             + COLUMN_RAPPORTI_VOTAZIONE + " INTEGER, "
             + COLUMN_RAPPORTI_PERSONA_ID + " INTEGER, "
             + COLUMN_RAPPORTI_TAGS_ID + " INTEGER, "
+            + COLUMN_RAPPORTI_USATO_PROTEZIONI + " BOOLEAN, "
             + "FOREIGN KEY(" + COLUMN_RAPPORTI_PERSONA_ID + ") REFERENCES " + TABLE_PERSONE + "(" + COLUMN_PERSONE_ID + "), "
             + "FOREIGN KEY(" + COLUMN_RAPPORTI_TAGS_ID + ") REFERENCES Tags(ID_Tags)"
             + ");";

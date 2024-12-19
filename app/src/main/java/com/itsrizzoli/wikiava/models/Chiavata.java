@@ -1,6 +1,7 @@
 package com.itsrizzoli.wikiava.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Chiavata {
     private int id;
@@ -14,6 +15,7 @@ public class Chiavata {
     private int numO;
     private int minuti;
     private int numRound;
+    private boolean usatoProtezioni;
 
     public Chiavata() {
     }
@@ -27,7 +29,7 @@ public class Chiavata {
         this.voto = voto;
     }
 
-    public Chiavata(Persona persona, float voto, String luogo, String posto, String data, String descrizione, ArrayList<String> tags, int numO, int minuti, int numRound) {
+    public Chiavata(Persona persona, float voto, String luogo, String posto, String data, String descrizione, ArrayList<String> tags, boolean usatoProtezioni) {
         this.persona = persona;
         this.voto = voto;
         this.luogo = luogo;
@@ -35,9 +37,7 @@ public class Chiavata {
         this.data = data;
         this.descrizione = descrizione;
         this.tags = tags;
-        this.numO = numO;
-        this.minuti = minuti;
-        this.numRound = numRound;
+        this.usatoProtezioni = usatoProtezioni;
     }
 
     public int getId() {
@@ -128,6 +128,27 @@ public class Chiavata {
         this.numRound = numRound;
     }
 
+    public boolean isUsatoProtezioni() {
+        return usatoProtezioni;
+    }
+
+    public void setUsatoProtezioni(boolean usatoProtezioni) {
+        this.usatoProtezioni = usatoProtezioni;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chiavata chiavata = (Chiavata) o;
+        return id == chiavata.id && Float.compare(voto, chiavata.voto) == 0 && numO == chiavata.numO && minuti == chiavata.minuti && numRound == chiavata.numRound && usatoProtezioni == chiavata.usatoProtezioni && Objects.equals(persona, chiavata.persona) && Objects.equals(luogo, chiavata.luogo) && Objects.equals(posto, chiavata.posto) && Objects.equals(data, chiavata.data) && Objects.equals(descrizione, chiavata.descrizione) && Objects.equals(tags, chiavata.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, persona, voto, luogo, posto, data, descrizione, tags, numO, minuti, numRound, usatoProtezioni);
+    }
+
     @Override
     public String toString() {
         return "Chiavata{" +
@@ -142,6 +163,7 @@ public class Chiavata {
                 ", numO=" + numO +
                 ", minuti=" + minuti +
                 ", numRound=" + numRound +
+                ", usatoProtezioni=" + usatoProtezioni +
                 '}';
     }
 }

@@ -24,6 +24,7 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
         TextView genereTextView;
         TextView bodyCountTextView;
         TextView dataTextView;
+        TextView usatoProtezioniTextView;
         TextView votoTextView;
         TextView descrizioneTextView;
     }
@@ -50,6 +51,7 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
             viewHolder.dataTextView = convertView.findViewById(R.id.dataTextView);
             viewHolder.votoTextView = convertView.findViewById(R.id.votoTextView);
             viewHolder.descrizioneTextView = convertView.findViewById(R.id.descrizioneTextView);
+            viewHolder.usatoProtezioniTextView = convertView.findViewById(R.id.usatoProtezioniTextView);
 
             convertView.setTag(viewHolder);
         } else {
@@ -67,6 +69,11 @@ public class ChiavataAdapter extends ArrayAdapter<Chiavata> {
         viewHolder.dataTextView.setText(chiavata.getData());
         viewHolder.votoTextView.setText(String.format("%.1f", chiavata.getVoto()));
         viewHolder.descrizioneTextView.setText(chiavata.getDescrizione());
+        if (chiavata.isUsatoProtezioni()){
+            viewHolder.usatoProtezioniTextView.setText("Si");
+        } else {
+            viewHolder.usatoProtezioniTextView.setText("No");
+        }
 
         if (chiavata.getDescrizione().isEmpty() || chiavata.getDescrizione().isBlank()){
             viewHolder.descrizioneTextView.setVisibility(View.INVISIBLE);

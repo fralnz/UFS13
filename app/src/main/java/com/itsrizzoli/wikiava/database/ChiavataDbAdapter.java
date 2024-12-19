@@ -28,6 +28,7 @@ public class ChiavataDbAdapter {
     private static final String KEY_DATA = "data_rapporto";
     private static final String KEY_DESCRIZIONE = "descrizione";
     private static final String KEY_TAGS_ID = "ID_Tags";
+    private static final String KEY_USATO_PROTEZIONI = "usato_protezioni";
 
     public ChiavataDbAdapter(Context context) {
         this.context = context;
@@ -51,6 +52,7 @@ public class ChiavataDbAdapter {
         values.put(KEY_POSTO, chiavata.getPosto());
         values.put(KEY_DATA, chiavata.getData());
         values.put(KEY_DESCRIZIONE, chiavata.getDescrizione());
+        values.put(KEY_USATO_PROTEZIONI, chiavata.isUsatoProtezioni());
         // Assuming tags are stored separately and linked via ID_TAGS
         return values;
     }
@@ -71,7 +73,8 @@ public class ChiavataDbAdapter {
 
     public Cursor fetchAllChiavate() {
         return database.query(TABLE_CHIAVATA,
-                new String[]{KEY_ID, KEY_PERSONA_ID, KEY_VOTO, KEY_LUOGO, KEY_POSTO, KEY_DATA, KEY_DESCRIZIONE},
+                new String[]{KEY_ID, KEY_PERSONA_ID, KEY_VOTO, KEY_LUOGO, KEY_POSTO, KEY_DATA,
+                        KEY_DESCRIZIONE, KEY_USATO_PROTEZIONI},
                 null, null, null, null, null);
     }
 
@@ -104,6 +107,7 @@ public class ChiavataDbAdapter {
             int dataIndex = chiavataCursor.getColumnIndex("data_rapporto");
             int descrizioneIndex = chiavataCursor.getColumnIndex("descrizione");
             int personaIdIndex = chiavataCursor.getColumnIndex("ID_Persona");
+            int usatoProtezioniIndex = chiavataCursor.getColumnIndex("usato_protezioni");
 
             do {
                 Chiavata chiavata = new Chiavata();
@@ -115,6 +119,8 @@ public class ChiavataDbAdapter {
                 if (dataIndex >= 0) chiavata.setData(chiavataCursor.getString(dataIndex));
                 if (descrizioneIndex >= 0)
                     chiavata.setDescrizione(chiavataCursor.getString(descrizioneIndex));
+                if (usatoProtezioniIndex >= 0)
+                    chiavata.setUsatoProtezioni(chiavataCursor.getInt(usatoProtezioniIndex) > 0);
 
                 int personaId = chiavataCursor.getInt(personaIdIndex);
                 if (personaIdIndex >= 0) {

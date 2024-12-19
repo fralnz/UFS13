@@ -110,6 +110,7 @@ public class NuovaChiavataFragment extends Fragment {
                 String data = dateEditText.getText().toString();
                 String descrizione = descrizioneEditText.getText().toString();
                 float voto = votoBar.getRating();
+                boolean usatoProtezioni = true;
 
                 ArrayList<String> selectedTags = new ArrayList<>();
                 for (String tag : selezionaTag.getText().toString().split(",\\s*")) {
@@ -132,7 +133,7 @@ public class NuovaChiavataFragment extends Fragment {
                     }
                     personaDbAdapter.close();
 
-                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, descrizione, selectedTags, 6, 33, 6);
+                    Chiavata nuovaChiavata = new Chiavata(persona, voto, luogo, luogo, data, descrizione, selectedTags, usatoProtezioni);
                     ChiavataDbAdapter chiavataDbAdapter = new ChiavataDbAdapter(getActivity());
                     chiavataDbAdapter.open();
                     chiavataDbAdapter.createChiavata(nuovaChiavata);
