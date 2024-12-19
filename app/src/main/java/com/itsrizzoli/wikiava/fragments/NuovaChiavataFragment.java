@@ -74,12 +74,22 @@ public class NuovaChiavataFragment extends Fragment {
         selezionaTag.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
         String locationString = LocationManager.getCurrentLocationString(this.getContext());
-        String[] coords = locationString.split(",");
-        double latitude = Double.parseDouble(coords[0]);
-        double longitude = Double.parseDouble(coords[1]);
 
-        String addressName = LocationManager.getAddressName(this.getContext(), latitude, longitude);
-        luogoEditText.setText(addressName);
+        if (!locationString.equals("Location permissions not granted") &&
+                !locationString.equals("GPS is disabled") &&
+                !locationString.equals("Location unavailable")) {
+
+            String[] coords = locationString.split(",");
+            double latitude = Double.parseDouble(coords[0]);
+            double longitude = Double.parseDouble(coords[1]);
+
+            String addressName = LocationManager.getAddressName(this.getContext(), latitude, longitude);
+            luogoEditText.setText(addressName);
+        } else {
+            // Nel caso in cui non ho i permessi di geolocalizzazione
+            luogoEditText.setText("");
+            Toast.makeText(getContext(), locationString, Toast.LENGTH_SHORT).show();
+        }
 
         Button salvaButton = view.findViewById(R.id.salvaButton);
 
