@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.RatingBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,7 @@ public class NuovaChiavataFragment extends Fragment {
         EditText luogoEditText = view.findViewById(R.id.luogo);
         MultiAutoCompleteTextView selezionaTag = view.findViewById(R.id.selezionaTag);
         EditText descrizioneEditText = view.findViewById(R.id.descrizione);
+        Switch usatoProtezioniSwitch = view.findViewById(R.id.protezioni);
         dateEditText = view.findViewById(R.id.data);
         RatingBar votoBar = view.findViewById(R.id.ratingExperience);
 
@@ -109,8 +111,8 @@ public class NuovaChiavataFragment extends Fragment {
                 String luogo = luogoEditText.getText().toString();
                 String data = dateEditText.getText().toString();
                 String descrizione = descrizioneEditText.getText().toString();
+                boolean usatoProtezioni = usatoProtezioniSwitch.isChecked();
                 float voto = votoBar.getRating();
-                boolean usatoProtezioni = true;
 
                 ArrayList<String> selectedTags = new ArrayList<>();
                 for (String tag : selezionaTag.getText().toString().split(",\\s*")) {
