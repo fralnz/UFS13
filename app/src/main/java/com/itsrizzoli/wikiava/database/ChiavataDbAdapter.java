@@ -53,7 +53,6 @@ public class ChiavataDbAdapter {
         values.put(KEY_DATA, chiavata.getData());
         values.put(KEY_DESCRIZIONE, chiavata.getDescrizione());
         values.put(KEY_USATO_PROTEZIONI, chiavata.isUsatoProtezioni());
-        // Assuming tags are stored separately and linked via ID_TAGS
         return values;
     }
 

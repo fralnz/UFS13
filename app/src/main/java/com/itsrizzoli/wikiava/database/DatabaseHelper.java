@@ -9,7 +9,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "mydatabase.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Table: Persone
     private static final String TABLE_PERSONE = "Persone";
     private static final String COLUMN_PERSONE_ID = "ID_Persona";
     private static final String COLUMN_PERSONE_NOME = "nome";
@@ -21,7 +20,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_PERSONE_GENERE + " VARCHAR(30)"
             + ");";
 
-    // Table: Rapporti
     private static final String TABLE_RAPPORTI = "Rapporti";
     private static final String COLUMN_RAPPORTI_ID = "ID_Rapporti";
     private static final String COLUMN_RAPPORTI_NOME = "nome";
@@ -49,7 +47,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "FOREIGN KEY(" + COLUMN_RAPPORTI_TAGS_ID + ") REFERENCES Tags(ID_Tags)"
             + ");";
 
-    // Table: Tags
     private static final String TABLE_TAGS = "Tags";
     private static final String COLUMN_TAGS_ID = "ID_Tags";
     private static final String COLUMN_TAGS_NOME = "nome";

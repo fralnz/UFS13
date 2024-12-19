@@ -38,7 +38,6 @@ public class LocationManager {
         android.location.LocationManager locationManager =
                 (android.location.LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-        // Check if location services are enabled
         if (!locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
             return "GPS is disabled";
         }
@@ -66,7 +65,6 @@ public class LocationManager {
             if (addresses != null && !addresses.isEmpty()) {
                 Address address = addresses.get(0);
 
-                // You can customize the address format as needed
                 return address.getAddressLine(0);
             }
         } catch (IOException e) {
